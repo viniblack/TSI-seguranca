@@ -1,10 +1,15 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = '';
-$db_name = 'projeto-security';
+$db_name = 'security';
+$db_port = 3001;
 
-$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name, $db_port);
 
 if (!$conn) {
     die('Connection failed: ' . mysqli_connect_error());
@@ -21,7 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (username, password) VALUES ('$username', '$password_hash')";
         mysqli_query($conn, $sql);
-        header('Location: login.php');
+        header('Location: index.php');
         exit;
     } else {
         $error = 'Username already exists';
