@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -9,9 +13,10 @@ if (isset($_SESSION['user_id'])) {
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = '';
-$db_name = 'projeto-security';
+$db_name = 'security';
+$db_port = 3001;
 
-$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+$conn = mysqli_connect($db_host, $db_user, $db_password, $db_name, $db_port);
 
 if (!$conn) {
     die('Connection failed: ' . mysqli_connect_error());
